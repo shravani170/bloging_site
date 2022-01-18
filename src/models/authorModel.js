@@ -11,7 +11,7 @@ var validateEmail = function(email) {
 const authorSchema = new mongoose.Schema({
      fname: { 
         type: String,
-        require: true
+        required: true
     },
      lname: {
         type: String,
