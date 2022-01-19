@@ -7,18 +7,19 @@ const createAuthor = async function (req, res) {
 
         let body = req.body;
         let data = await AuthorModel.create(body);
-        res.status(201).send({status: true, msg: data})
+        res.status(201).send({status: true, data: data})
 
     }
     catch(err){
 
-        res.status(400).send({msg: err.message})
+        res.status(500).send({msg: err.message})
 
     }
 }
 
 const login = async function (req, res) 
 {
+    try{
     let useremail = req.body.email
     let userpassword = req.body.password
     if (useremail && userpassword) 
@@ -35,6 +36,10 @@ const login = async function (req, res)
     }else {
         res.status(400).send({ status: false, msg: "request body must contain  email as well as password" })
     }
+      }
+catch (error) {
+    res.status(500).send({status: false, message: error.message});
+}
 }
 
 module.exports.createAuthor = createAuthor;
